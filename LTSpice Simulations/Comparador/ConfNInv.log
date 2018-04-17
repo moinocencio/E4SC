@@ -1,0 +1,22 @@
+Circuit: * Z:\home\moinocencio\Universidade\E4\Pratica\Comparador\ConfNInv.asc
+
+WARNING: Less than two connections to node NC_01.  This node is used by R3.
+Direct Newton iteration for .op point succeeded.
+
+Date: Tue Apr 10 15:24:43 2018
+Total elapsed time: 0.232 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 11686
+traniter = 11655
+tranpoints = 2768
+accept = 2291
+rejected = 477
+matrix size = 17
+fillins = 6
+solver = Alternate
+Matrix Compiler1: 1.33 KB object code size  0.8/0.6/[0.5]
+Matrix Compiler2: off  [0.7]/0.8/0.8
+
