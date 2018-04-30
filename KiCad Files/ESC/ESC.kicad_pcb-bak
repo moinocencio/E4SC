@@ -4157,7 +4157,7 @@
   )
 
   (module Socket_Strips:Socket_Strip_Straight_1x03_Pitch2.54mm (layer F.Cu) (tedit 58CD5446) (tstamp 5AE1DBD9)
-    (at 251.6 35.2 180)
+    (at 163.2 40 180)
     (descr "Through hole straight socket strip, 1x03, 2.54mm pitch, single row")
     (tags "Through hole socket strip THT 1x03 2.54mm single row")
     (path /5AE1FB8B)

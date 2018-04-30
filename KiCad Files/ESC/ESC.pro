@@ -1,4 +1,4 @@
-update=Sat 14 Apr 2018 03:56:34 PM WEST
+update=Tue 24 Apr 2018 06:34:34 PM WEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,8 +23,6 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
@@ -186,3 +184,5 @@ LibName144=/home/moinocencio/Setups/Kicad Libraries/kicad-library-master/library
 LibName145=/home/moinocencio/Setups/Kicad Libraries/kicad-library-master/library/xilinx-virtex7
 LibName146=/home/moinocencio/Setups/Kicad Libraries/kicad-library-master/library/zetex
 LibName147=/home/moinocencio/Setups/Kicad Libraries/kicad-library-master/library/Zilog
+[general]
+version=1

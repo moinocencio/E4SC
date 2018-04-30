@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>/home/moinocencio/Universidade/E4/Pratica/ESC/ESC.sch</source>
-    <date>Sat 14 Apr 2018 03:53:12 PM WEST</date>
+    <source>/home/moinocencio/Universidade/E4/Pratica/E4SC/KiCad Files/ESC/ESC.sch</source>
+    <date>Tue 17 Apr 2018 10:16:39 AM WEST</date>
     <tool>Eeschema 4.0.7</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -925,26 +925,26 @@
     </libpart>
   </libparts>
   <libraries>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="transistors">
+      <uri>/usr/share/kicad/library/transistors.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="linear">
+      <uri>/usr/share/kicad/library/linear.lib</uri>
+    </library>
+    <library logical="regul">
+      <uri>/usr/share/kicad/library/regul.lib</uri>
+    </library>
     <library logical="ir">
       <uri>/home/moinocencio/Setups/Kicad Libraries/kicad-library-master/library/ir.lib</uri>
     </library>
     <library logical="references">
       <uri>/home/moinocencio/Setups/Kicad Libraries/kicad-library-master/library/references.lib</uri>
-    </library>
-    <library logical="linear">
-      <uri>/usr/share/kicad/library/linear.lib</uri>
-    </library>
-    <library logical="conn">
-      <uri>/usr/share/kicad/library/conn.lib</uri>
-    </library>
-    <library logical="transistors">
-      <uri>/usr/share/kicad/library/transistors.lib</uri>
-    </library>
-    <library logical="regul">
-      <uri>/usr/share/kicad/library/regul.lib</uri>
-    </library>
-    <library logical="device">
-      <uri>/usr/share/kicad/library/device.lib</uri>
     </library>
   </libraries>
   <nets>
