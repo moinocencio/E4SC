@@ -629,7 +629,7 @@ Text Label 6200 3400 0    60   ~ 0
 PhaseBLIN
 Text Label 6200 3500 0    60   ~ 0
 PhaseBSD
-Text GLabel 1300 2100 2    60   UnSpc ~ 0
+Text GLabel 1950 2200 2    60   UnSpc ~ 0
 LogicVCC
 Text GLabel 1900 2000 2    60   UnSpc ~ 0
 LogicGND
@@ -1258,7 +1258,7 @@ Text GLabel 1300 2300 2    60   UnSpc ~ 0
 OverCurInt
 Text GLabel 1900 2400 2    60   UnSpc ~ 0
 MeanCur
-Text GLabel 1950 2200 2    60   UnSpc ~ 0
+Text GLabel 1300 2100 2    60   UnSpc ~ 0
 BatVoltMeas
 $Comp
 L R R12

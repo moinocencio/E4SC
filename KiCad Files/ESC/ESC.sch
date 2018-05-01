@@ -1414,9 +1414,7 @@ Wire Notes Line
 Wire Notes Line
 	10650 2350 6100 2350
 Wire Notes Line
-	850  1750 850  4300
-Wire Notes Line
-	850  4300 2300 4300
+	500  4300 2300 4300
 Wire Notes Line
 	850  550  4150 550 
 Wire Wire Line
@@ -2378,4 +2376,8 @@ F 3 "" H 950 3900 50  0001 C CNN
 	1    950  3900
 	-1   0    0    1   
 $EndComp
+Wire Notes Line
+	500  4300 500  1750
+Wire Notes Line
+	500  1750 900  1750
 $EndSCHEMATC
