@@ -5,6 +5,15 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>../../config_bits.h</itemPath>
+      <itemPath>../../ADC_test2.c</itemPath>
+      <itemPath>../../adc.c</itemPath>
+      <itemPath>../../adc.h</itemPath>
+      <itemPath>../../pwm.c</itemPath>
+      <itemPath>../../pwm.h</itemPath>
+      <itemPath>../../pwm_test.c</itemPath>
+      <itemPath>../../testall.c</itemPath>
+      <itemPath>../../uart.c</itemPath>
+      <itemPath>../../uart.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
