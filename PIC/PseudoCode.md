@@ -146,9 +146,44 @@ O processo nesta fase está explicito na secção **_Controlo de Velocidade_**
 
 ```c
 ISR_ExtInt<FaseFlutuante> () {
-
+  (...)
 }
 ```
+
+#### Controlo de Corrente e Consumo
+
+O controlo da corrente terá 2 vertentes:
+- Monitorização de sobre-corrente
+- Consumo do Controlador
+
+O primeiro está ligado à segurança do circuito, sendo que o procedimento é controlado por uma interrupção externa. Se a rotina desta for executada, significa que o circuito corre o risco de entrar em falência, logo tem que ser tomadas medidas para desligar o controlador. Estas são:
+
+- Disable dos timers que controlam as saídas HIN e LIN dos drivers
+- Ligar shutdowns dos drivers
+- Notificar utilizador
+- Disable das interrupções externas
+
+O controlo do consumo apenas está dependente da leitura da queda da resistência pela ADC e valor da tensão da bateria, em instantes definidos.
+
+Esta leitura por parte da ADC pode ser feita com uma frequência muito mais baixa em relação à frequência de funcionamento do circuito. Para poder obter uma medida correta da energia gasta pelo circuito, o procedimento mais correto seria o uso de um timer que fizesse o pedido de leitura da ADC.
+
+```c
+ISR_T<MedidaADC> () {
+  TMR<MedidaADC> = 0;                     // Reset do timer do PWM
+  pedirConversãoADC();
+}
+
+ISR_ADC () {
+  current = ADCCurrentValue;
+  voltage = ADCCurrentValue;
+  resetADCFlags();
+}
+```
+#### Main
+
+Da maneira como a programação do controlador está pensada, a maioria das rotinas estarão a trabalhar independentemente, através de interrupções vetorizadas.
+
+Deste modo, o ciclo while(1) estará praticamente vazio. O início da main servirá para inicialização e configuração dos timers.
 
 ### Notas
 
