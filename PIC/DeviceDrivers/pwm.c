@@ -14,8 +14,59 @@ void pwm_v1(void)
 	OC2CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
 	OC2CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
 	OC2RS = 128; // Ton constant
-	OC2CONbits.ON = 1; // Enable OC1 module
+	OC2CONbits.ON = 1; // Enable OC2 module
 }
+// 3 Outputs
+void pwm_config(void)
+{
+    T3CONbits.TCKPS = 2;
+	PR3 = 512; 
+	TMR3 = 0; // Reset timer T3 count register
+	T3CONbits.TON = 1; // Enable timer T3 (must be the last command of the
+	// timer configuration sequence)
+	OC2CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
+	OC2CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
+	OC2RS = 128; // Ton constant
+	OC2CONbits.ON = 1; // Enable OC2 module
+    
+    OC3CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
+	OC3CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
+	OC3RS = 128; // Ton constant
+    OC3CONbits.ON = 1; // Enable OC2 module
+    
+    OC4CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
+	OC4CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
+	OC4RS = 128; // Ton constant
+    OC4CONbits.ON = 1; // Enable OC2 module
+}
+// 3 Outputs
+/*
+void pwm_config_lowfreq(void)
+{
+    T2CONbits.TCKPS = 2;
+    T2CONbits.T32 = 1;
+	PR2 = 312499; 
+	TMR2 = 0; 
+	T2CONbits.TON = 1; 
+	
+    
+    // timer configuration sequence)
+	OC2CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
+	OC2CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
+	OC2RS = 156250; // Ton constant
+	OC2CONbits.ON = 1; // Enable OC2 module
+    
+    OC3CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
+	OC3CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
+	OC3RS = 156250; // Ton constant
+    OC3CONbits.ON = 1; // Enable OC2 module
+    
+    OC4CONbits.OCM = 6; // PWM mode on OCx; fault pin disabled
+	OC4CONbits.OCTSEL =1;// Use timer T3 as the time base for PWM generation
+	OC4RS = 156250; // Ton constant
+    OC4CONbits.ON = 1; // Enable OC2 module
+}
+ */
 void set_pwm(uint32_t freq, uint32_t dcycle)
 {
     T3CONbits.TCKPS = 2; // 1:32 - 625 Hz % 16 ou 32 bits
