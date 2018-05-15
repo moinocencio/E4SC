@@ -11,7 +11,7 @@ void config_timer2()
     T2CONbits.ON = 0; 
     T2CONbits.TCKPS = 1;
     TMR2 = 0;
-    PR2 = 124; 
+    PR2 = 249; 
     T2CONbits.TON = 1; 
 }
 // Control Sequence 
