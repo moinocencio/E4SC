@@ -233,6 +233,6 @@ void main (void)
     
     while(1)
     {
-        // testADC();   // Send BatVoltMeas and MeanCur to PC
+        testADC();   // Send BatVoltMeas and MeanCur to PC
     }
 }

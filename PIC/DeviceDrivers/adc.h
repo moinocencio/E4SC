@@ -2,7 +2,7 @@
 #define __ADC_H__
 
 void  config_adc();
-float readADC(int ADCnr);
+uint32_t readADC(int ADCnr);
 void  testADC();
 
 #endif

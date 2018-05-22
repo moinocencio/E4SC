@@ -1250,7 +1250,7 @@ Text GLabel 3550 2600 2    60   UnSpc ~ 0
 LogicGND
 Text GLabel 3350 2150 0    60   UnSpc ~ 0
 MeanCur
-Text GLabel 2700 1000 0    60   UnSpc ~ 0
+Text GLabel 2000 1000 0    60   UnSpc ~ 0
 BatVoltMeas
 Text Notes 2950 3500 0    60   ~ 12
 Current Measure
@@ -1643,13 +1643,9 @@ Connection ~ 9400 750
 Wire Wire Line
 	8300 750  9550 750 
 Wire Wire Line
-	1650 1600 2350 1600
-Connection ~ 1650 1500
+	1400 1600 2350 1600
 Wire Wire Line
 	1000 1350 1000 1500
-Connection ~ 1650 800 
-Wire Wire Line
-	1650 650  1650 1050
 Wire Wire Line
 	7350 2050 7350 1950
 Wire Wire Line
@@ -1867,7 +1863,7 @@ Wire Wire Line
 	9150 1500 9400 1500
 Connection ~ 9400 1500
 Wire Wire Line
-	1650 650  1750 650 
+	1400 650  1750 650 
 Wire Wire Line
 	2050 650  4900 650 
 Wire Bus Line
@@ -2043,8 +2039,6 @@ Wire Notes Line
 Wire Notes Line
 	6050 550  4200 550 
 Wire Wire Line
-	1650 1250 1650 1600
-Wire Wire Line
 	950  2400 1900 2400
 Wire Wire Line
 	1300 2100 1150 2100
@@ -2142,12 +2136,12 @@ Connection ~ 3500 1300
 $Comp
 L CP1_Small C3
 U 1 1 5ACE5B95
-P 1650 1150
-F 0 "C3" H 1660 1220 50  0000 L CNN
-F 1 "330u" H 1660 1070 50  0000 L CNN
-F 2 "Capacitors_THT:CP_Radial_D12.5mm_P7.50mm" H 1650 1150 50  0001 C CNN
-F 3 "" H 1650 1150 50  0001 C CNN
-	1    1650 1150
+P 1400 1150
+F 0 "C3" H 1410 1220 50  0000 L CNN
+F 1 "330u" H 1410 1070 50  0000 L CNN
+F 2 "Capacitors_THT:CP_Radial_D12.5mm_P7.50mm" H 1400 1150 50  0001 C CNN
+F 3 "" H 1400 1150 50  0001 C CNN
+	1    1400 1150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -2380,4 +2374,54 @@ Wire Notes Line
 	500  4300 500  1750
 Wire Notes Line
 	500  1750 900  1750
+Wire Wire Line
+	1400 1600 1400 1250
+Connection ~ 1400 1500
+Wire Wire Line
+	1400 650  1400 1050
+Connection ~ 1400 800 
+$Comp
+L R R44
+U 1 1 5AF5E6D9
+P 2550 1000
+F 0 "R44" V 2630 1000 50  0000 C CNN
+F 1 "8.2k" V 2550 1000 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 2480 1000 50  0001 C CNN
+F 3 "" H 2550 1000 50  0001 C CNN
+	1    2550 1000
+	0    1    1    0   
+$EndComp
+$Comp
+L R R43
+U 1 1 5AF5E968
+P 2400 1150
+F 0 "R43" V 2480 1150 50  0000 C CNN
+F 1 "3.3k" V 2400 1150 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 2330 1150 50  0001 C CNN
+F 3 "" H 2400 1150 50  0001 C CNN
+	1    2400 1150
+	-1   0    0    1   
+$EndComp
+$Comp
+L C_Small C24
+U 1 1 5AF5EAE3
+P 2200 1100
+F 0 "C24" H 2210 1170 50  0000 L CNN
+F 1 "100n" H 2210 1020 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 2200 1100 50  0001 C CNN
+F 3 "" H 2200 1100 50  0001 C CNN
+	1    2200 1100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 1300 2200 1200
+Wire Wire Line
+	2000 1000 2400 1000
+Connection ~ 2200 1000
+Wire Wire Line
+	2200 1300 2700 1300
+Wire Wire Line
+	2700 1300 2700 1500
+Connection ~ 2700 1500
+Connection ~ 2400 1300
 $EndSCHEMATC
