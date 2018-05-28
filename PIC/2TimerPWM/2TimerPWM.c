@@ -26,19 +26,20 @@ void main (void) {
     config_Inttimer5();
     TMR5 = 0;
     TMR2 = 0;
+    IEC0bits.T2IE = 1;      // Set Timer 2 Interrupt Enable bit 
     enableInterrupts();
     
     while(1);
 }
 
 void __ISR(8) isr_timer2(void){  // Put outputs to HIGH and enable T5
-    LATE |= !0xFFC0;
+    LATE |= 0x003F;
     TMR5 = 0;
     TMR2 = 0;
+    IFS0bits.T5IF = 0;
     /* Set Timer 5 Interrupt Enable bit  */
     IEC0bits.T5IE = 1;     
     /* Reset flag */
-    IFS0bits.T5IF = 0;
     IFS0bits.T2IF = 0;
 }
 

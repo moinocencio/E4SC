@@ -24,12 +24,12 @@ void config_Inttimer2()
 {
     IPC2bits.T2IP = 1;      /* Timer 2 priority: 2 */
     IPC2bits.T2IS = 0;      /* Timer 2 sub-priority: 0 */   
-    IEC0bits.T2IE = 1;      /* Set Timer 2 Interrupt Enable bit */
+    //IEC0bits.T2IE = 1;      /* Set Timer 2 Interrupt Enable bit */
 }
 // Sequence Control
 void config_Inttimer5()
 {
     IPC5bits.T5IP = 5;      /* Timer 5 priority: 2 */
     IPC5bits.T5IS = 0;      /* Timer 5 sub-priority: 0 */
-    IEC0bits.T5IE = 1;      /* Set Timer 5 Interrupt Enable bit */
+    //IEC0bits.T5IE = 1;      /* Set Timer 5 Interrupt Enable bit */
 }
