@@ -33,7 +33,6 @@ void config_timer5()
     T5CONbits.ON = 0;           // Stop the timer 
     T5CONbits.TCKPS = 6;         
     TMR5 = 0;
-    // A 450 tá top chucha
-    PR5 = 450; 
+    PR5 = 600; 
     T5CONbits.TON = 1; 
 }

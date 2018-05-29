@@ -10,8 +10,8 @@ void enableInterrupts()
 {
  
     // Problem 
-    INTCONSET = _INTCON_MVEC_MASK;    
-    // INTCONbits.MVEC = 1;
+    //INTCONSET = _INTCON_MVEC_MASK;    
+     INTCONbits.MVEC = 1;
     __builtin_enable_interrupts(); 
 }
 // Disable System Interrupts
@@ -41,7 +41,7 @@ void config_extInt2()
 {
     IEC0bits.INT2IE = 0;
     INTCONbits.INT2EP = 1;  // Rising Edge
-    IPC2bits.INT2IP = 6;    // Priority 
+    IPC2bits.INT2IP = 3;    // Priority 
     IEC0bits.INT2IE = 1;    // Enable
     IFS0bits.INT2IF = 0;    // Reset Flag
 }
@@ -50,7 +50,7 @@ void config_extInt3()
 {
     IEC0bits.INT3IE = 0;
     INTCONbits.INT3EP = 1;  // Rising Edge
-    IPC3bits.INT3IP = 6;    // Priority 
+    IPC3bits.INT3IP = 3;    // Priority 
     IEC0bits.INT3IE = 1;    // Enable
     IFS0bits.INT3IF = 0;    // Reset Flag
 }
@@ -59,22 +59,32 @@ void config_extInt4()
 {
     IEC0bits.INT4IE = 0;
     INTCONbits.INT4EP = 0;  // Falling Edge
-    IPC4bits.INT4IP = 6;    // Priority 
+    IPC4bits.INT4IP = 3;    // Priority 
     IEC0bits.INT4IE = 1;    // Enable
     IFS0bits.INT4IF = 0;    // Reset Flag
 }
-// PWM
+// PWM HIGH
 void config_Inttimer2()
 {
-    IPC2bits.T2IP = 3;      // Timer 2 priority: 2 
+    IPC2bits.T2IP = 1;      // Timer 2 priority: 2 
     IPC2bits.T2IS = 0;      // Timer 2 sub-priority: 0    
-    IEC0bits.T2IE = 1;      // Set Timer 2 Interrupt Enable bit 
+    //IEC0bits.T2IE = 1;      // Set Timer 2 Interrupt Enable bit 
     // IEC0bits.OC2IE = 1;  // Set Output Compare 2 Interrupt Enable bit 
 }
+
+// PWM LOW
+void config_Inttimer3()
+{
+    IPC3bits.T3IP = 1;      // Timer 2 priority: 2 
+    IPC3bits.T3IS = 0;      // Timer 2 sub-priority: 0    
+    //IEC0bits.T3IE = 1;      // Set Timer 2 Interrupt Enable bit 
+    // IEC0bits.OC2IE = 1;  // Set Output Compare 2 Interrupt Enable bit 
+}
+
 // Sequence Control
 void config_Inttimer5()
 {
-    IPC5bits.T5IP = 3;      /* Timer 5 priority: 2 */
+    IPC5bits.T5IP = 5;      /* Timer 5 priority: 2 */
     IPC5bits.T5IS = 0;      /* Timer 5 sub-priority: 0 */
-    IEC0bits.T5IE = 0;      /* Set Timer 5 Interrupt Enable bit */
+    IEC0bits.T5IE = 1;      /* Set Timer 5 Interrupt Enable bit */
 }

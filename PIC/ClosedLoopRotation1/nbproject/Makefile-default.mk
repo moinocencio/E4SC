@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=int.c pwm.c timers.c uart.c ClosedLoopShifter.c adc.c esc.c
+SOURCEFILES_QUOTED_IF_SPACED=int.c pwm.c timers.c uart.c ClosedLoopShifter.c adc.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/int.o ${OBJECTDIR}/pwm.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/ClosedLoopShifter.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/esc.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/int.o.d ${OBJECTDIR}/pwm.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/ClosedLoopShifter.o.d ${OBJECTDIR}/adc.o.d ${OBJECTDIR}/esc.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/int.o ${OBJECTDIR}/pwm.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/ClosedLoopShifter.o ${OBJECTDIR}/adc.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/int.o.d ${OBJECTDIR}/pwm.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/ClosedLoopShifter.o.d ${OBJECTDIR}/adc.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/int.o ${OBJECTDIR}/pwm.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/ClosedLoopShifter.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/esc.o
+OBJECTFILES=${OBJECTDIR}/int.o ${OBJECTDIR}/pwm.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/ClosedLoopShifter.o ${OBJECTDIR}/adc.o
 
 # Source Files
-SOURCEFILES=int.c pwm.c timers.c uart.c ClosedLoopShifter.c adc.c esc.c
+SOURCEFILES=int.c pwm.c timers.c uart.c ClosedLoopShifter.c adc.c
 
 
 CFLAGS=
@@ -142,12 +142,6 @@ ${OBJECTDIR}/adc.o: adc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/adc.o 
 	@${FIXDEPS} "${OBJECTDIR}/adc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPK3OBPlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/adc.o.d" -o ${OBJECTDIR}/adc.o adc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/esc.o: esc.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/esc.o.d 
-	@${RM} ${OBJECTDIR}/esc.o 
-	@${FIXDEPS} "${OBJECTDIR}/esc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPK3OBPlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/esc.o.d" -o ${OBJECTDIR}/esc.o esc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
-	
 else
 ${OBJECTDIR}/int.o: int.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -184,12 +178,6 @@ ${OBJECTDIR}/adc.o: adc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/adc.o.d 
 	@${RM} ${OBJECTDIR}/adc.o 
 	@${FIXDEPS} "${OBJECTDIR}/adc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/adc.o.d" -o ${OBJECTDIR}/adc.o adc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/esc.o: esc.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/esc.o.d 
-	@${RM} ${OBJECTDIR}/esc.o 
-	@${FIXDEPS} "${OBJECTDIR}/esc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/esc.o.d" -o ${OBJECTDIR}/esc.o esc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD) 
 	
 endif
 

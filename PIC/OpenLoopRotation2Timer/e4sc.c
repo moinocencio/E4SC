@@ -1,5 +1,4 @@
 #include "config_bits.h"
-#include <stdint.h>
 #include <xc.h>            
 #include <sys/attribs.h> 
 #include "uart.h"
@@ -15,13 +14,11 @@ volatile int laststate = 0;     // Last state of pwm
 volatile int counter = 0;       // 
 volatile int duty_cycle = 2;    // 1 - 25% 2- 50% 3- 75% 4-100%
 
-uint32_t nr = 1;
-
 // Delay random
 void delay()
 {
     int j = 0;
-    for(j=0;j<200000;j++)  
+    for(j=0;j<900000;j++)  
     {
     }    
 }
@@ -64,24 +61,24 @@ void send_seq(int state)
     }        
 }
 // ADC Interrupt
-void __ISR(27,IPL3AUTO) isr_adc(void)
+void __ISR(27) isr_adc(void)
 {
     int j =0;
-    uint32_t val = 0, aux = 0;
+    float val = 0, aux = 0;
 	int *p = (int* ) (&ADC1BUF0);
 	for(j = 0; j < 8; j++)
     {
 		aux = p[j*4];
-        val += (aux*3300+12)/1023;   //  -> 12 - Calibration
+        val += (aux*3.3+12)/1023;   //  -> 12 - Calibration
 	}
     val = val/8;
-    // printf("\n_Voltage: %4.3d\n\r", val);
-    // delay();
+    printf("Vint: %f\n\r", val);
+    delay();
     IFS1bits.AD1IF = 0; // Reset AD1IF flag
-    AD1CON1bits.ASAM = 1; // Start Conversion
+    // AD1CON1bits.ASAM = 1; // Start Conversion
 }
 // OverCurInt - pin 2
-void __ISR(7,IPL3AUTO) isr_extInt1(void)
+void __ISR(7) isr_extInt1(void)
 {
     printf("\nExternal Interrupt_1 - Over Current - pin2\r");
     // Shut Down Drivers
@@ -89,7 +86,7 @@ void __ISR(7,IPL3AUTO) isr_extInt1(void)
     IFS0bits.INT1IF = 0;    // Reset Flag
 }
 // External Interrupt 2 - PhaseATrig - pin 7
-void __ISR(11,IPL6AUTO) isr_extInt2(void)
+void __ISR(11) isr_extInt2(void)
 {
     printf("\nExternal Interrupt_2 - PhaseATrig - pin7 -- State: %d\r", state+1);
     INTCONbits.INT2EP = !INTCONbits.INT2EP; // Rising Edge <-> Falling Edge  
@@ -104,7 +101,7 @@ void __ISR(11,IPL6AUTO) isr_extInt2(void)
     IFS0bits.INT2IF = 0; // Flag
 }
 // External Interrupt 3 - PhaseBTrig - pin 21
-void __ISR(15,IPL6AUTO) isr_extInt3(void)
+void __ISR(15) isr_extInt3(void)
 {
     printf("\nExternal Interrupt_3 - PhaseBTrig - pin21 -- State: %d\r", state+1);
     INTCONbits.INT3EP = !INTCONbits.INT3EP; // Rising Edge <-> Falling Edge  
@@ -119,7 +116,7 @@ void __ISR(15,IPL6AUTO) isr_extInt3(void)
     IFS0bits.INT3IF = 0; // Flag
 }
 // External Interrupt 4 - PhaseCTrig - pin 20
-void __ISR(19,IPL6AUTO) isr_extInt4(void)
+void __ISR(19) isr_extInt4(void)
 {
     printf("\nExternal Interrupt_4 - PhaseCTrig -pin20 -- State: %d\r", state+1);
     INTCONbits.INT4EP = !INTCONbits.INT4EP; // Rising Edge <-> Falling Edge  
@@ -134,7 +131,7 @@ void __ISR(19,IPL6AUTO) isr_extInt4(void)
     IFS0bits.INT4IF = 0; // Reset Flag
 }
 // Timer 2 Interrupt - Freq PWM
-void __ISR(8,IPL3AUTO) isr_timer2(void)
+void __ISR(8) isr_timer2(void)
 {
     if(counter < duty_cycle && laststate == 0) // && state != laststate)
     {
@@ -188,7 +185,7 @@ void __ISR(8,IPL3AUTO) isr_timer2(void)
     IFS0bits.T2IF = 0;     // Reset flag   
 }
 // Control Timer 
-void __ISR(20,IPL3AUTO) isr_timer5(void)
+void __ISR(20) isr_timer5(void)
 { 
     // Phase 3
     IFS0bits.T5IF = 0; // Reset flag
@@ -213,12 +210,11 @@ void test_send_seq(int nr, int state,int Aseq[], int Bseq[], int Cseq[])
 void initial_configs()
 {
     config_uart();      // UART Configuration
-    //config_adc();
     TRISG &= 0x8FFF;    // Define RG14-RA12 as outputs - 0
     LATG &= 0x8FFF;     // Drivers On RG14-RG12 - 1
     TRISE &= 0xFFC0;    // Define RE0-RE5 as outputs
     config_timer2();    // PWM configuration
-    // config_adcInt();    // ADC Interrupt
+    // config_adcInt(); // ADC Interrupt
     config_extInt1();   // Over Current detect
     config_extInt2();   // PhaseATrig
     config_extInt3();   // PhaseBTrig
@@ -230,9 +226,9 @@ void main (void)
 {
     initial_configs();
     enableInterrupts(); 
-    
+      
     while(1)
     {
-    //    testADC();   // Send BatVoltMeas and MeanCur to PC
+        // testADC();   // Send BatVoltMeas and MeanCur to PC
     }
 }

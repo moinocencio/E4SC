@@ -5,86 +5,78 @@
 
 #include "int.h"
 
-// Enable System Interrupts
-void enableInterrupts()
+void enableInterrupts() // Enable System Interrupts
 {
  
     // Problem 
-    //INTCONSET = _INTCON_MVEC_MASK;    
-     INTCONbits.MVEC = 1;
+    INTCONSET = _INTCON_MVEC_MASK;    
+    // INTCONbits.MVEC = 1;
     __builtin_enable_interrupts(); 
 }
-// Disable System Interrupts
-void disableInterrupts()
+
+void disableInterrupts() // Disable System Interrupts
 {
     __builtin_disable_interrupts(); 
 }
-// Configuração das Interrupções
-void config_adcInt()
+
+void config_adcInt() // Configuração das Interrupções
 {
     // ADC Interrupt
     IPC6bits.AD1IP = 2;     // Priority
 	IEC1bits.AD1IE = 1;     // Enable
 	IFS1bits.AD1IF = 0;     // Reset AD1IF flag
 }
-// OverCurInt - pin 2
-void config_extInt1()
+
+void config_extInt1() // OverCurInt - pin 2
 {
     IEC0bits.INT1IE = 0;    
     INTCONbits.INT1EP = 1;  // Rising Edge 
-    IPC1bits.INT1IP = 3;    // Priority 
+    IPC1bits.INT1IP = 6;    // Priority 
     IEC0bits.INT1IE = 1;    // Enable
     IFS0bits.INT1IF = 0;    // Reset Flag
 }
-// External Interrupt 2 - PhaseATrig - pin 7
-void config_extInt2()
+
+void config_extInt2() // External Interrupt 2 - PhaseATrig - pin 7
 {
     IEC0bits.INT2IE = 0;
     INTCONbits.INT2EP = 1;  // Rising Edge
-    IPC2bits.INT2IP = 3;    // Priority 
+    IPC2bits.INT2IP = 5;    // Priority 
     IEC0bits.INT2IE = 1;    // Enable
     IFS0bits.INT2IF = 0;    // Reset Flag
 }
-// External Interrupt 3 - PhaseBTrig - pin 21
-void config_extInt3()
+
+void config_extInt3() // External Interrupt 3 - PhaseBTrig - pin 21
 {
     IEC0bits.INT3IE = 0;
     INTCONbits.INT3EP = 1;  // Rising Edge
-    IPC3bits.INT3IP = 3;    // Priority 
+    IPC3bits.INT3IP = 5;    // Priority 
     IEC0bits.INT3IE = 1;    // Enable
     IFS0bits.INT3IF = 0;    // Reset Flag
 }
-// External Interrupt 4 - PhaseCTrig - pin 20
-void config_extInt4()
+
+void config_extInt4() // External Interrupt 4 - PhaseCTrig - pin 20
 {
     IEC0bits.INT4IE = 0;
     INTCONbits.INT4EP = 0;  // Falling Edge
-    IPC4bits.INT4IP = 3;    // Priority 
+    IPC4bits.INT4IP = 5;    // Priority 
     IEC0bits.INT4IE = 1;    // Enable
     IFS0bits.INT4IF = 0;    // Reset Flag
 }
-// PWM HIGH
-void config_Inttimer2()
+
+void config_Inttimer2() // PWM HIGH
 {
-    IPC2bits.T2IP = 1;      // Timer 2 priority: 2 
-    IPC2bits.T2IS = 0;      // Timer 2 sub-priority: 0    
-    //IEC0bits.T2IE = 1;      // Set Timer 2 Interrupt Enable bit 
-    // IEC0bits.OC2IE = 1;  // Set Output Compare 2 Interrupt Enable bit 
+    IPC2bits.T2IP = 3;      
+    IEC0bits.T2IE = 1;      // Set Timer 2 Interrupt Enable bit 
 }
 
-// PWM LOW
-void config_Inttimer3()
+void config_Inttimer3() // PWM LOW
 {
-    IPC3bits.T3IP = 1;      // Timer 2 priority: 2 
-    IPC3bits.T3IS = 0;      // Timer 2 sub-priority: 0    
-    //IEC0bits.T3IE = 1;      // Set Timer 2 Interrupt Enable bit 
-    // IEC0bits.OC2IE = 1;  // Set Output Compare 2 Interrupt Enable bit 
+    IPC3bits.T3IP = 3;
+    IEC0bits.T3IE = 1;      // Set Timer 2 Interrupt Enable bit 
 }
 
-// Sequence Control
-void config_Inttimer5()
+void config_Inttimer5() // Sequence Control
 {
-    IPC5bits.T5IP = 5;      /* Timer 5 priority: 2 */
-    IPC5bits.T5IS = 0;      /* Timer 5 sub-priority: 0 */
+    IPC5bits.T5IP = 4;      
     IEC0bits.T5IE = 1;      /* Set Timer 5 Interrupt Enable bit */
 }
