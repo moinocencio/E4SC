@@ -1,7 +1,18 @@
 /* Closed Loop Shifter:
- *  2nd iteration of rotation controlled by zero crossing, with pooling
+ *  1st iteration of rotation controlled by zero crossing
  * 
+ * Situations where state gets updated:
+ *  - Control Timer ISR
+ *  - External Interrupts
  * 
+ * When state gets updated:
+ *  - Update Mask
+ *  - Change floating phase Interrupt trigger
+ *  - Change Interrupts
+ * 
+ * The motor starts rotating in open loop, and after a number of correct successive zero
+ * crossings by phase A, the system begins to rotate in closed loop, returning to open 
+ * loop after a defined number of consecutive fails.
  */
 
 #include "config_bits.h"
@@ -31,7 +42,7 @@ void __ISR(8,IPL3AUTO) isr_timer2(void)  // Set pins to HIGH and enabling T3
 
 void __ISR(12,IPL3AUTO) isr_timer3(void) // Set pins to LOW
 {
-    LATE &= 0xFFC0;
+    LATE &= NdriverMask;
     TMR3 = 0;
     /* Disable Timer 3 Interrupt */
     IEC0bits.T3IE = 0;  
@@ -47,9 +58,18 @@ void __ISR(20,IPL4AUTO) isr_timer5(void) // Control Timer
      * forces the next state and updates the masks
      */
     
-    disableFloatingInterrupt();
+    if(zcCounter == zcTresh )
+        feedbackFlag = 1;
+        
+    else if(feedbackFlag == 1)
+        failCounter++;
     
+    if(failCounter == zcTresh) {
+        feedbackFlag = 0;
+        zcCounter = 0;
+    }
     
+    updateAllInterrupts();
     switchInterruptEdge();
         
     if(state == 5)
@@ -58,7 +78,6 @@ void __ISR(20,IPL4AUTO) isr_timer5(void) // Control Timer
         state++;
     
     updateMask();
-    updateAllInterrupts();
     
     IFS0bits.T5IF = 0; // Reset flag
 }
@@ -72,67 +91,65 @@ void __ISR(7,IPL6AUTO) isr_extInt1(void) // Over Current Interrupt
 
 void __ISR(11,IPL5AUTO) isr_extInt2(void) // External Interrupt 2 - PhaseATrig - pin 7
 {
-    IEC0bits.T5IE = 0;
+    LATE &= NdriverMask;
     
-    LATE &= 0xFFC0;
+    if(!feedbackFlag)
+        zcCounter++;
+    else{     
+        TMR5 = 0;
+        if(state == 5)
+            state = 0;
+        else
+            state++;
 
-    if(state == 5)
-        state = 0;
-    else
-        state++;
-
-    updateMask();
-    updateInterrupts();
+        updateMask();
+        updateInterrupts();
+    }
     
     IFS0bits.INT2IF = 0; // Flag
     INTCONbits.INT2EP = !INTCONbits.INT2EP; // Rising Edge <-> Falling Edge
-    
-    TMR5 = 0;
-    IEC0bits.T5IE = 1;
 }
 
 void __ISR(15,IPL5AUTO) isr_extInt3(void) // External Interrupt 3 - PhaseBTrig - pin 21
 {
-    IEC0bits.T5IE = 0;
-    
-    LATE &= 0xFFC0;
+    if(!feedbackFlag)
+        zcCounter++;    
+    else { 
+        LATE &= NdriverMask;
 
-    TMR5 = 0;
-    if(state == 5)
-        state = 0;
-    else
-        state++;
+        TMR5 = 0;
+        if(state == 5)
+            state = 0;
+        else
+            state++;
 
-    updateMask();
-    updateInterrupts();
+        updateMask();
+        updateInterrupts();
+    }
     
     IFS0bits.INT3IF = 0; // Flag
     INTCONbits.INT3EP = !INTCONbits.INT3EP; // Rising Edge <-> Falling Edge
-    
-    TMR5 = 0;
-    IEC0bits.T5IE = 1;
 }
 
 void __ISR(19,IPL5AUTO) isr_extInt4(void) // External Interrupt 4 - PhaseCTrig - pin 20
-{        
-    IEC0bits.T5IE = 0;
-    
-    LATE &= 0xFFC0;
+{
+    if(!feedbackFlag) 
+        zcCounter++;   
+    else{
+        LATE &= NdriverMask;
 
-    TMR5 = 0;
-    if(state == 5)
-        state = 0;
-    else
-        state++;
+        TMR5 = 0;
+        if(state == 5)
+            state = 0;
+        else
+            state++;
 
-    updateMask();
-    updateInterrupts();
+        updateMask();
+        updateInterrupts();
+    }
     
     IFS0bits.INT4IF = 0; // Flag
     INTCONbits.INT4EP = !INTCONbits.INT4EP; // Rising Edge <-> Falling Edge
-    
-    TMR5 = 0;
-    IEC0bits.T5IE = 1;
 }
 
 void initial_configs()
@@ -144,10 +161,10 @@ void initial_configs()
     TRISE &= 0xFFC0;    // Define RE0-RE5 as outputs
     LATE &= 0xFFC0;
     // External Interrupts
-    //TRISEbits.TRISE8 = 1;
-    //TRISEbits.TRISE9 = 1;
-    //TRISAbits.TRISA14 = 1;
-    //TRISAbits.TRISA15 = 1;
+    TRISEbits.TRISE8 = 1;
+    TRISEbits.TRISE9 = 1;
+    TRISAbits.TRISA14 = 1;
+    TRISAbits.TRISA15 = 1;
     
     config_timer2();    // PWM HIGH configuration
     config_timer3();    // PWM LOW configuration

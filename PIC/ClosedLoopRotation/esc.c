@@ -5,7 +5,6 @@
 #include "esc.h"
 
 volatile unsigned int driverMask;           // Mask of drivers to put to HIGH, on each state
-volatile unsigned int NdriverMask;          // Mask of drivers to clear
 volatile unsigned int state = 0;            // state of the system
 
 void updateMask(void) {
@@ -35,7 +34,6 @@ void updateMask(void) {
         default:
             break;
     }
-    NdriverMask = !driverMask;
 }
 
 void updateInterrupts(void) {
@@ -142,6 +140,41 @@ void switchInterruptEdge(void) {
             break;
         case 5:         //A Low - C High
             INTCONbits.INT3EP = !INTCONbits.INT3EP; // Rising Edge <-> Falling Edge  
+            break;
+        default:
+            break;
+    }
+}
+
+void disableFloatingInterrupt(void) {
+    /*
+     * Disable Interrupt that was expected to be turned on the present phase and
+     * reset flag 
+     */
+    switch(state) {
+        case 0:         //B Low - C High 
+            IFS0bits.INT2IF = 0; // Flag
+            IEC0bits.INT2IE = 0;    // Disable A Trig            
+            break;
+        case 1:         //B Low - A High
+            IFS0bits.INT4IF = 0; // Flag
+            IEC0bits.INT4IE = 0;    // Disable C Trig
+            break;
+        case 2:         //C Low - A High
+            IFS0bits.INT3IF = 0; // Flag
+            IEC0bits.INT3IE = 0;    // Disable B Trig
+            break;
+        case 3:         //C Low - B High
+            IFS0bits.INT2IF = 0; // Flag
+            IEC0bits.INT2IE = 0;    // Disable A Trig
+            break;
+        case 4:         //A Low - B High
+            IFS0bits.INT4IF = 0; // Flag
+            IEC0bits.INT4IE = 0;    // Disable C Trig
+            break;
+        case 5:         //A Low - C High
+            IFS0bits.INT3IF = 0; // Flag
+            IEC0bits.INT3IE = 0;    // Disable B Trig
             break;
         default:
             break;

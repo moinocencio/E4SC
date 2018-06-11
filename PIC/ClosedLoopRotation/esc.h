@@ -11,7 +11,7 @@ void updateMask();
 void updateInterrupts();
 void updateAllInterrupts();
 void switchInterruptEdge();
-
+void disableFloatingInterrupt();
 #endif 
 
 /* *****************************************************************************

@@ -39,7 +39,7 @@ void config_extInt1() // OverCurInt - pin 2
 void config_extInt2() // External Interrupt 2 - PhaseATrig - pin 7
 {
     IEC0bits.INT2IE = 0;
-    INTCONbits.INT2EP = 0;  // Rising Edge
+    INTCONbits.INT2EP = 1;  // Rising Edge
     IPC2bits.INT2IP = 5;    // Priority 
     IEC0bits.INT2IE = 1;    // Enable
     IFS0bits.INT2IF = 0;    // Reset Flag
@@ -48,7 +48,7 @@ void config_extInt2() // External Interrupt 2 - PhaseATrig - pin 7
 void config_extInt3() // External Interrupt 3 - PhaseBTrig - pin 21
 {
     IEC0bits.INT3IE = 0;
-    INTCONbits.INT3EP = 0;  // Rising Edge
+    INTCONbits.INT3EP = 1;  // Rising Edge
     IPC3bits.INT3IP = 5;    // Priority 
     IEC0bits.INT3IE = 1;    // Enable
     IFS0bits.INT3IF = 0;    // Reset Flag
@@ -57,7 +57,7 @@ void config_extInt3() // External Interrupt 3 - PhaseBTrig - pin 21
 void config_extInt4() // External Interrupt 4 - PhaseCTrig - pin 20
 {
     IEC0bits.INT4IE = 0;
-    INTCONbits.INT4EP = 1;  // Falling Edge
+    INTCONbits.INT4EP = 0;  // Falling Edge
     IPC4bits.INT4IP = 5;    // Priority 
     IEC0bits.INT4IE = 1;    // Enable
     IFS0bits.INT4IF = 0;    // Reset Flag
@@ -65,18 +65,18 @@ void config_extInt4() // External Interrupt 4 - PhaseCTrig - pin 20
 
 void config_Inttimer2() // PWM HIGH
 {
-    IPC2bits.T2IP = 3;      
+    IPC2bits.T2IP = 1;      
     IEC0bits.T2IE = 1;      // Set Timer 2 Interrupt Enable bit 
 }
 
 void config_Inttimer3() // PWM LOW
 {
-    IPC3bits.T3IP = 3;
+    IPC3bits.T3IP = 1;
     IEC0bits.T3IE = 1;      // Set Timer 2 Interrupt Enable bit 
 }
 
 void config_Inttimer5() // Sequence Control
 {
-    IPC5bits.T5IP = 4;      
+    IPC5bits.T5IP = 5;      
     IEC0bits.T5IE = 1;      /* Set Timer 5 Interrupt Enable bit */
 }
